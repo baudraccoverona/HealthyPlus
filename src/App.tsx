@@ -1,19 +1,12 @@
 import React from 'react';
-import {
-  SafeAreaView,
-  View,
-  Text
-} from 'react-native';
-import List from './components/List';
+import {SafeAreaView} from 'react-native';
+import Login from './components/Login';
+import List from './components/List'
 
 const App = () => {
-
   return (
     <SafeAreaView>
-      <View>
-        <List />
-        <Text>Hola</Text>
-      </View>
+      <Login />
     </SafeAreaView>
   );
 };
