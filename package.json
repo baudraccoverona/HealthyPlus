@@ -10,6 +10,7 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "^1.16.1",
     "@react-navigation/bottom-tabs": "^6.2.0",
     "@react-navigation/native": "^6.0.8",
     "@react-navigation/native-stack": "^6.5.0",
@@ -25,7 +26,8 @@
     "react-native-vector-icons": "^9.1.0",
     "react-navigation": "^4.4.4",
     "react-navigation-stack": "^2.10.4",
-    "regenerator-runtime": "^0.13.9"
+    "regenerator-runtime": "^0.13.9",
+    "rn-flipper-async-storage-advanced": "^1.0.4"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

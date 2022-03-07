@@ -4,9 +4,10 @@ export default StyleSheet.create({
   container: {
     backgroundColor: '#ffffff',
   },
-  item: {
+  itemContainer: {
     display: 'flex',
     flexDirection: 'row',
+    justifyContent: 'space-between',
     borderBottomWidth: 1,
     borderBottomColor: 'gray',
     padding: 10,
@@ -14,9 +15,14 @@ export default StyleSheet.create({
     fontFamily: 'Poppins',
     alignItems: 'center',
   },
+  leftContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   dataContainer: {
     display: 'flex',
-    justifyContent: 'space-between',
+    flexDirection: 'column',
   },
   data: {
     fontWeight: '500',
@@ -31,13 +37,10 @@ export default StyleSheet.create({
     paddingTop: 15,
     fontSize: 20,
   },
-  rightContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-  },
   icons: {
     flexDirection: 'row',
     alignItems: 'center',
+    padding: 5,
   },
   addContainer: {
     paddingRight: 40,
@@ -51,5 +54,8 @@ export default StyleSheet.create({
     fontWeight: '500',
     fontSize: 20,
     alignSelf: 'center',
+  },
+  icon: {
+    padding: 5,
   },
 });

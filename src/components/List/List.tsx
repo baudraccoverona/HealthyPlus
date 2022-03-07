@@ -27,11 +27,11 @@ interface Props {
 
 const List: React.FC<Props> = ({navigation}) => {
   const [clients, setClients] = useState<Client[]>([] as Client[]);
-  const [isLoading, setLoading] = useState(true);
-  const [usernameToEdit, setUsernameToEdit] = useState('');
-  const [emailToEdit, setEmailToEdit] = useState('');
-  const [nameToEdit, setNameToEdit] = useState('');
-  const [idToEdit, setIdToEdit] = useState('');
+  const [isLoading, setLoading] = useState<boolean>(true);
+  const [usernameToEdit, setUsernameToEdit] = useState<string>('');
+  const [emailToEdit, setEmailToEdit] = useState<string>('');
+  const [nameToEdit, setNameToEdit] = useState<string>('');
+  const [idToEdit, setIdToEdit] = useState<string>('');
 
   useEffect(() => {
     fetch(`${url}`)
@@ -52,7 +52,7 @@ const List: React.FC<Props> = ({navigation}) => {
     setEmailToEdit(clientToEdit[0].email);
     setNameToEdit(clientToEdit[0].name);
     setIdToEdit(clientToEdit[0].id);
-    navigation.navigate('Form', {
+    navigation.navigate('ClientForm', {
       name: nameToEdit,
       username: usernameToEdit,
       email: emailToEdit,
@@ -75,7 +75,7 @@ const List: React.FC<Props> = ({navigation}) => {
   };
 
   const handleCreate = () => {
-    navigation.navigate('Form', {
+    navigation.navigate('ClientForm', {
       name: '',
       username: '',
       email: '',
@@ -84,27 +84,27 @@ const List: React.FC<Props> = ({navigation}) => {
   };
 
   const Item: React.FC<Client> = ({name, id, email}) => (
-    <View style={styles.item}>
-      <IonIcons name={'person-circle'} size={40} />
-      <View style={styles.rightContainer}>
+    <View style={styles.itemContainer}>
+      <View style={styles.leftContainer}>
+        <IonIcons name={'person-circle'} size={40} />
         <View style={styles.dataContainer}>
           <Text style={styles.data}>{name}</Text>
           <Text style={styles.data}>{email}</Text>
         </View>
-        <View style={styles.icons}>
-          <TouchableOpacity
-            onPress={() => {
-              handleEdit(id);
-            }}>
-            <IonIcons name={'pencil-sharp'} size={26} />
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              handleDelete(id);
-            }}>
-            <IonIcons name={'trash'} size={26} />
-          </TouchableOpacity>
-        </View>
+      </View>
+      <View style={styles.icons}>
+        <TouchableOpacity
+          onPress={() => {
+            handleEdit(id);
+          }}>
+          <IonIcons style={styles.icon} name={'pencil-sharp'} size={26} />
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            handleDelete(id);
+          }}>
+          <IonIcons style={styles.icon} name={'trash'} size={26} />
+        </TouchableOpacity>
       </View>
     </View>
   );

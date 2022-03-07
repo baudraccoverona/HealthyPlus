@@ -6,7 +6,6 @@ import {Client, Client as IClient} from '../List/List';
 import Toast from 'react-native-simple-toast';
 import {NavigationScreenProp} from 'react-navigation';
 import {RouteProp} from '@react-navigation/native';
-import {CardStyleInterpolators} from 'react-navigation-stack';
 
 const url = 'https://jsonplaceholder.typicode.com/users';
 

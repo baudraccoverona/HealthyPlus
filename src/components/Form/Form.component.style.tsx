@@ -3,7 +3,8 @@ import {StyleSheet} from 'react-native';
 export default StyleSheet.create({
   container: {
     backgroundColor: '#ffffff',
-    paddingTop: 50,
+    paddingTop: 150,
+    paddingBottom: 300,
   },
   title: {
     textAlign: 'center',

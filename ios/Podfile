@@ -12,7 +12,7 @@ target 'HealthyPlus' do
     :hermes_enabled => false
   )
 
-  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
 
   target 'HealthyPlusTests' do
     inherit! :complete
@@ -28,5 +28,7 @@ target 'HealthyPlus' do
   post_install do |installer|
     react_native_post_install(installer)
     __apply_Xcode_12_5_M1_post_install_workaround(installer)
+
+
   end
 end

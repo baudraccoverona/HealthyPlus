@@ -4,18 +4,52 @@ import {useForm, Controller} from 'react-hook-form';
 import styles from './Login.component.style';
 import Toast from 'react-native-simple-toast';
 import {NavigationScreenProp} from 'react-navigation';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface Props {
   navigation: NavigationScreenProp<any, 'Login'>;
-  reset: NavigationScreenProp<any, 'Login'>;
 }
 
-const Login: React.FC<Props> = ({navigation}) => {
-  const {control, handleSubmit} = useForm();
+interface Data {
+  email: string;
+  password: string;
+}
 
-  const onSubmit = (data: any) => {
-    Toast.show('Credentials validated');
-    navigation.navigate('BottomTabNavigator');
+type LoginProps = {
+  handleLogin: () => void;
+};
+
+const user = {
+  email: 'test@test.com.ar',
+  password: 'test123',
+};
+
+const Login = ({handleLogin}: LoginProps) => {
+  const {control, handleSubmit} = useForm<Data>({
+    defaultValues: {
+      email: user.email,
+      password: user.password,
+    },
+  });
+
+  const onSubmit = (data: Data) => {
+    if (user.email !== data.email) {
+      return Toast.show('Invalid user, try again.');
+    }
+    if (user.password !== data.password) {
+      return Toast.show('Invalid password, try again.');
+    }
+    storeData(data);
+    handleLogin();
+  };
+
+  const storeData = async (value: Data) => {
+    try {
+      const jsonValue = JSON.stringify(value);
+      await AsyncStorage.setItem('@storage_Key', jsonValue);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (

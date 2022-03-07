@@ -2,8 +2,8 @@ import {StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
   container: {
-    display: 'flex',
     paddingTop: 200,
+    paddingBottom: 500,
     paddingLeft: 40,
     paddingRight: 40,
     fontFamily: 'Poppins',
