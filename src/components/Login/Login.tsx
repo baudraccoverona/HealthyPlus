@@ -7,6 +7,7 @@ import {NavigationScreenProp} from 'react-navigation';
 
 interface Props {
   navigation: NavigationScreenProp<any, 'Login'>;
+  reset: NavigationScreenProp<any, 'Login'>;
 }
 
 const Login: React.FC<Props> = ({navigation}) => {

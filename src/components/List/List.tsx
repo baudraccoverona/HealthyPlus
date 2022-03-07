@@ -7,13 +7,10 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import styles from './List.component.style';
-import User from '../../assets/img/account_circle_black_24dp(2).svg';
-import Edit from '../../assets/img/edit_black_24dp (1).svg';
-import Delete from '../../assets/img/delete_black_24dp.svg';
-import Add from '../../assets/img/add_circle_black_24dp.svg';
 import Toast from 'react-native-simple-toast';
 import Props from '../Login/Login';
 import {NavigationScreenProp} from 'react-navigation';
+import IonIcons from 'react-native-vector-icons/Ionicons';
 
 const url = 'https://jsonplaceholder.typicode.com/users';
 
@@ -88,7 +85,7 @@ const List: React.FC<Props> = ({navigation}) => {
 
   const Item: React.FC<Client> = ({name, id, email}) => (
     <View style={styles.item}>
-      <User width={30} height={30} />
+      <IonIcons name={'person-circle'} size={40} />
       <View style={styles.rightContainer}>
         <View style={styles.dataContainer}>
           <Text style={styles.data}>{name}</Text>
@@ -99,13 +96,13 @@ const List: React.FC<Props> = ({navigation}) => {
             onPress={() => {
               handleEdit(id);
             }}>
-            <Edit width={30} height={30} />
+            <IonIcons name={'pencil-sharp'} size={26} />
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
               handleDelete(id);
             }}>
-            <Delete width={30} height={30} />
+            <IonIcons name={'trash'} size={26} />
           </TouchableOpacity>
         </View>
       </View>
@@ -121,13 +118,13 @@ const List: React.FC<Props> = ({navigation}) => {
   );
 
   return isLoading ? (
-    <View>
-      <Text>Loading...</Text>
+    <View style={styles.container}>
+      <Text style={styles.loading}>Loading...</Text>
     </View>
   ) : (
     <View style={styles.container}>
       <TouchableOpacity style={styles.addContainer} onPress={handleCreate}>
-        <Add width={50} height={50} />
+        <IonIcons name={'ios-add-circle'} size={54} />
       </TouchableOpacity>
       <FlatList
         data={clients}

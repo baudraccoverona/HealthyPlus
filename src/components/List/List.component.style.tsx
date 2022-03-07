@@ -47,4 +47,9 @@ export default StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-end',
   },
+  loading: {
+    fontWeight: '500',
+    fontSize: 20,
+    alignSelf: 'center',
+  },
 });

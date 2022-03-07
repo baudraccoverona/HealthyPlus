@@ -13,7 +13,7 @@ function getHeaderTitle(route: any) {
   switch (routeName) {
     case 'Home':
       return 'Home';
-    case 'List':
+    case 'Clients':
       return 'Clients';
   }
 }
