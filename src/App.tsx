@@ -1,14 +1,8 @@
 import React from 'react';
-import {SafeAreaView} from 'react-native';
-import Login from './components/Login';
-import List from './components/List'
+import MainStack from './navigators/MainStack';
 
 const App = () => {
-  return (
-    <SafeAreaView>
-      <Login />
-    </SafeAreaView>
-  );
+  return <MainStack />;
 };
 
 export default App;
