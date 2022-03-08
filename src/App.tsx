@@ -1,17 +1,7 @@
-// import React from 'react';
-// import MainStack from './navigators/MainStack';
-// import {SafeAreaView} from 'react-native-safe-area-context';
-
-// const App = () => {
-//   return <MainStack />;
-// };
-
-// export default App;
-
 import React, {useEffect, useState} from 'react';
 import {SafeAreaView, StyleSheet} from 'react-native';
 import FlipperAsyncStorage from 'rn-flipper-async-storage-advanced';
-// import ClientContextProvider from './context';
+import ClientContextProvider from './context';
 import Navigator from './routes/navigator';
 // import {checkPermission, PERMISSION_TYPE} from './AppPermissions';
 
@@ -27,12 +17,12 @@ const App = () => {
   // }, []);
 
   return (
-    // <ClientContextProvider>
-    <SafeAreaView style={styles.safeArea}>
-      <FlipperAsyncStorage />
-      <Navigator handleLogin={handleLogin} logged={logged} />
-    </SafeAreaView>
-    // </ClientContextProvider>
+    <ClientContextProvider>
+      <SafeAreaView style={styles.safeArea}>
+        <FlipperAsyncStorage />
+        <Navigator handleLogin={handleLogin} logged={logged} />
+      </SafeAreaView>
+    </ClientContextProvider>
   );
 };
 

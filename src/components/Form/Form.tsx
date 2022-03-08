@@ -1,76 +1,48 @@
-import React, {useState, useEffect, isValidElement} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {View, Text, TouchableOpacity, TextInput} from 'react-native';
-import styles from './Form.component.style';
-import {useForm, Controller} from 'react-hook-form';
-import {Client, Client as IClient} from '../List/List';
-import Toast from 'react-native-simple-toast';
-import {NavigationScreenProp} from 'react-navigation';
-import {RouteProp} from '@react-navigation/native';
+import styles from './styles';
+import {useForm, Controller, SubmitHandler} from 'react-hook-form';
+import {Client as IClient} from '../List/List';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {RootStackParamList} from '../../types/types';
+import {AppPermissionsContext} from '../../context';
 
 const url = 'https://jsonplaceholder.typicode.com/users';
 
-interface Props {
-  navigation: NavigationScreenProp<any, 'Form'>;
-  route: RouteProp<{params: Client}, 'params'>;
-}
+type Props = NativeStackScreenProps<RootStackParamList, 'ClientForm'>;
 
-const Edit: React.FC<Props> = ({navigation, route}) => {
-  const {control, handleSubmit} = useForm({
-    defaultValues: {
-      name: route.params?.name || '',
-      email: route.params?.email || '',
-      username: route.params?.username || '',
-    },
-  });
-  const [clients, setClients] = useState<IClient[]>([] as IClient[]);
+const Edit = ({navigation, route}: Props) => {
+  const clientContextProvider = useContext(AppPermissionsContext);
 
-  useEffect(() => {
-    fetch(`${url}`)
-      .then(response => response.json())
-      .then(json => {
-        setClients(json);
-      });
-  }, []);
+  const {
+    control: control,
+    handleSubmit: handleSubmit,
+    setValue,
+  } = useForm<IClient>();
 
-  const onSubmit = (data: any) => {
-    if (route.params.id) {
-      fetch(`${url}/${route.params.id}`, {
-        method: 'PUT',
-        body: JSON.stringify({
-          id: route.params.id,
-          email: route.params.email,
-          name: route.params.name,
-          username: route.params.username,
-        }),
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8',
-        },
-      }).then(response => {
-        if (response.status === 200) {
-          Toast.show('Client updated successfully');
-          navigation.navigate('List');
-        }
+  const onSubmit: SubmitHandler<IClient> = data => {
+    if (route.params?.client) {
+      clientContextProvider?.updateClient({
+        ...route.params.client,
+        ...data,
       });
     } else {
-      fetch(`${url}/${route.params.id}`, {
-        method: 'POST',
-        body: JSON.stringify({
-          id: '',
-          email: route.params.email,
-          name: route.params.name,
-          username: route.params.username,
-        }),
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8',
-        },
-      }).then(response => {
-        if (response.status === 201) {
-          Toast.show('Client created successfully');
-          navigation.navigate('List');
-        }
-      });
+      clientContextProvider?.createClient(data);
     }
+    navigation.goBack();
   };
+
+  useEffect(() => {
+    setValue('name', route.params?.client?.name || '');
+    setValue('email', route.params?.client?.email || '');
+    setValue('username', route.params?.client?.username || '');
+  }, [route, setValue]);
+
+  useEffect(() => {
+    navigation.setOptions({
+      title: route.params?.client ? 'Edit Client' : 'Add New Client',
+    });
+  }, [navigation, route.params?.client]);
 
   return (
     <View style={styles.container}>

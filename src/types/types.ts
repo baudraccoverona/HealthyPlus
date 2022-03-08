@@ -13,3 +13,13 @@ export interface iClientContext {
     updateClient: (client: ClientType) => void;
     getClients: () => void;
   }
+
+  export type RootStackParamList = {
+    Login: undefined;
+    Home: undefined;
+    Welcome: undefined;
+    ClientsList: undefined;
+    ClientForm?: {
+      client?: ClientType;
+    };
+  };

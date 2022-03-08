@@ -9,7 +9,6 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import IonIcons from 'react-native-vector-icons/Ionicons';
-import AntDesign from 'react-native-vector-icons/AntDesign';
 import {Text, TouchableOpacity, View} from 'react-native';
 
 const Stack = createNativeStackNavigator();
@@ -38,8 +37,7 @@ const Navigator = ({handleLogin, logged}: NavigatorProps) => {
                 onPress={() => navigation.goBack(null)}
                 style={{paddingRight: 70}}>
                 <View style={{alignItems: 'center', paddingLeft: 10}}>
-                  <AntDesign name="back" size={20} />
-                  <Text>Back</Text>
+                  <IonIcons name="arrow-back-outline" size={25} />
                 </View>
               </TouchableOpacity>
             ),
@@ -91,7 +89,6 @@ const Navigator = ({handleLogin, logged}: NavigatorProps) => {
         </Tab.Navigator>
       ) : (
         <Stack.Navigator>
-          {/* <Stack.Screen name="Welcome" component={WelcomePage} /> */}
           <Stack.Screen name="LogIn">
             {() => <LogIn handleLogin={handleLogin} />}
           </Stack.Screen>

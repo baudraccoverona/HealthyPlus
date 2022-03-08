@@ -43,6 +43,7 @@ const ClientContextProvider: FC = ({children}) => {
         email: client.email,
       },
     ]);
+    Toast.show('Client created successfully.');
   };
 
   const updateClient = (client: ClientType) => {
@@ -56,6 +57,7 @@ const ClientContextProvider: FC = ({children}) => {
         return c;
       }),
     );
+    Toast.show('Client updated successfully.');
   };
 
   return (

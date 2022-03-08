@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, TextInput, TouchableOpacity} from 'react-native';
 import {useForm, Controller} from 'react-hook-form';
-import styles from './Login.component.style';
+import styles from './styles';
 import Toast from 'react-native-simple-toast';
 import {NavigationScreenProp} from 'react-navigation';
 import AsyncStorage from '@react-native-async-storage/async-storage';
