@@ -1,14 +1,18 @@
 import React from 'react';
-import {View, Text, TextInput, TouchableOpacity} from 'react-native';
+import {View, Text} from 'react-native';
 import {useForm, Controller} from 'react-hook-form';
 import styles from './styles';
 import Toast from 'react-native-simple-toast';
-import {NavigationScreenProp} from 'react-navigation';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Button from '../Shared/Button';
+import Input from '../Shared/Input';
 
-interface Props {
-  navigation: NavigationScreenProp<any, 'Login'>;
-}
+export const storeData = async (value: Data) => {
+  try {
+    const jsonValue = JSON.stringify(value);
+    await AsyncStorage.setItem('@storage_Key', jsonValue);
+  } catch (e) {}
+};
 
 interface Data {
   email: string;
@@ -17,6 +21,7 @@ interface Data {
 
 type LoginProps = {
   handleLogin: () => void;
+  testID?: string;
 };
 
 const user = {
@@ -24,7 +29,7 @@ const user = {
   password: 'test123',
 };
 
-const Login = ({handleLogin}: LoginProps) => {
+const Login = ({handleLogin, testID}: LoginProps) => {
   const {control, handleSubmit} = useForm<Data>({
     defaultValues: {
       email: user.email,
@@ -33,6 +38,9 @@ const Login = ({handleLogin}: LoginProps) => {
   });
 
   const onSubmit = (data: Data) => {
+    if (user.email !== data.email && user.password !== data.password) {
+      return Toast.show('Invalid credentials, try again.');
+    }
     if (user.email !== data.email) {
       return Toast.show('Invalid user, try again.');
     }
@@ -43,17 +51,8 @@ const Login = ({handleLogin}: LoginProps) => {
     handleLogin();
   };
 
-  const storeData = async (value: Data) => {
-    try {
-      const jsonValue = JSON.stringify(value);
-      await AsyncStorage.setItem('@storage_Key', jsonValue);
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
   return (
-    <View style={styles.container}>
+    <View style={styles.container} testID={testID}>
       <Controller
         control={control}
         name="email"
@@ -61,13 +60,13 @@ const Login = ({handleLogin}: LoginProps) => {
           required: true,
         }}
         render={({field: {onChange, onBlur, value}}) => (
-          <TextInput
-            style={styles.input}
+          <Input
             onBlur={onBlur}
             onChangeText={onChange}
             value={value}
             autoCapitalize="none"
             placeholder="Email"
+            secureTextEntry={undefined}
           />
         )}
       />
@@ -78,8 +77,7 @@ const Login = ({handleLogin}: LoginProps) => {
           required: true,
         }}
         render={({field: {onChange, onBlur, value}}) => (
-          <TextInput
-            style={styles.input}
+          <Input
             onBlur={onBlur}
             onChangeText={onChange}
             value={value}
@@ -89,9 +87,7 @@ const Login = ({handleLogin}: LoginProps) => {
           />
         )}
       />
-      <TouchableOpacity style={styles.button} onPress={handleSubmit(onSubmit)}>
-        <Text style={styles.buttonText}>Log in</Text>
-      </TouchableOpacity>
+      <Button text={'Log in'} onPress={handleSubmit(onSubmit)} />
       <View style={styles.signUpContainer}>
         <Text>Don't have an account?</Text>
         <Text style={styles.signUp}>Sign up</Text>

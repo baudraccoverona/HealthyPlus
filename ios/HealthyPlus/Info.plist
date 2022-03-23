@@ -4,6 +4,9 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
+
+	<key>NSCameraUsageDescription</key>
+	<string>Let $(APP_DISPLAY_NAME) use the camera to record your face.</string>
 	<key>CFBundleDisplayName</key>
 	<string>HealthyPlus</string>
 	<key>CFBundleExecutable</key>

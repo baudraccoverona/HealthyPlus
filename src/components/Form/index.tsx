@@ -1,8 +1,8 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useEffect, useContext} from 'react';
 import {View, Text, TouchableOpacity, TextInput} from 'react-native';
 import styles from './styles';
 import {useForm, Controller, SubmitHandler} from 'react-hook-form';
-import {Client as IClient} from '../List/List';
+import {Client as IClient} from '../List';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../types/types';
 import {AppPermissionsContext} from '../../context';
@@ -10,7 +10,6 @@ import {AppPermissionsContext} from '../../context';
 const url = 'https://jsonplaceholder.typicode.com/users';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'ClientForm'>;
-
 const Edit = ({navigation, route}: Props) => {
   const clientContextProvider = useContext(AppPermissionsContext);
 
@@ -38,7 +37,7 @@ const Edit = ({navigation, route}: Props) => {
     setValue('username', route.params?.client?.username || '');
   }, [route, setValue]);
 
-  useEffect(() => {
+  React.useLayoutEffect(() => {
     navigation.setOptions({
       title: route.params?.client ? 'Edit Client' : 'Add New Client',
     });

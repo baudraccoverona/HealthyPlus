@@ -9,15 +9,6 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins',
     backgroundColor: '#ffffff',
   },
-  input: {
-    height: 40,
-    marginBottom: 30,
-    borderWidth: 1,
-    borderTopColor: '#ffffff',
-    borderLeftColor: '#ffffff',
-    borderRightColor: '#ffffff',
-    borderBottomColor: '#191970',
-  },
   button: {
     backgroundColor: '#191970',
     borderRadius: 5,

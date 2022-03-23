@@ -7,12 +7,10 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import styles from './styles';
-import Props from '../Login/Login';
+import Props from '../Login';
 import {NavigationScreenProp} from 'react-navigation';
 import IonIcons from 'react-native-vector-icons/Ionicons';
 import {AppPermissionsContext} from '../../context';
-
-const url = 'https://jsonplaceholder.typicode.com/users';
 
 export interface Client {
   id: number;
@@ -23,9 +21,10 @@ export interface Client {
 
 interface Props {
   navigation: NavigationScreenProp<any, 'List'>;
+  testID?: string;
 }
 
-const List: React.FC<Props> = ({navigation}) => {
+const List: React.FC<Props> = ({navigation, testID}) => {
   const clientContextProvider = useContext(AppPermissionsContext);
 
   const handleUpdate = (
@@ -85,15 +84,18 @@ const List: React.FC<Props> = ({navigation}) => {
   );
 
   return (
-    <View style={styles.container}>
-      <TouchableOpacity style={styles.addContainer} onPress={handleCreate}>
+    <View style={styles.container} testID={testID}>
+      <TouchableOpacity
+        style={styles.addContainer}
+        onPress={handleCreate}
+        testID={'add-form'}>
         <IonIcons name={'ios-add-circle'} size={54} />
       </TouchableOpacity>
       <FlatList
         data={clientContextProvider?.clients}
         renderItem={RenderItem}
         keyExtractor={item => item.id.toString()}
-        refreshing={clientContextProvider?.loading}
+        refreshing={false}
         onRefresh={() => clientContextProvider?.getClients()}
       />
     </View>

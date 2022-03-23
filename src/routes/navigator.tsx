@@ -1,15 +1,14 @@
 import React from 'react';
-import ClientsList from '../components/List/List';
-import HomePage from '../components/Home/Home';
-// import UserScreen from '../components/';
-import LogIn from '../components/Login/Login';
-import ClientForm from '../components/Form/Form';
-// import WelcomePage from '../Components/Welcome/Welcome';
+import ClientsList from '../components/List';
+import HomePage from '../components/Home';
+import User from '../components/User';
+import LogIn from '../components/Login';
+import ClientForm from '../components/Form';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import IonIcons from 'react-native-vector-icons/Ionicons';
-import {Text, TouchableOpacity, View} from 'react-native';
+import {TouchableOpacity, View} from 'react-native';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -37,7 +36,11 @@ const Navigator = ({handleLogin, logged}: NavigatorProps) => {
                 onPress={() => navigation.goBack(null)}
                 style={{paddingRight: 70}}>
                 <View style={{alignItems: 'center', paddingLeft: 10}}>
-                  <IonIcons name="arrow-back-outline" size={25} />
+                  <IonIcons
+                    name="arrow-back-outline"
+                    size={25}
+                    testID={'go-back'}
+                  />
                 </View>
               </TouchableOpacity>
             ),
@@ -47,6 +50,19 @@ const Navigator = ({handleLogin, logged}: NavigatorProps) => {
       </Stack.Navigator>
     );
   }
+
+  function UserStackScreen() {
+    return (
+      <Stack.Navigator>
+        <Stack.Screen
+          name="UserAccount"
+          component={User}
+          options={{title: 'Account'}}
+        />
+      </Stack.Navigator>
+    );
+  }
+
   return (
     <NavigationContainer>
       {logged ? (
@@ -85,7 +101,7 @@ const Navigator = ({handleLogin, logged}: NavigatorProps) => {
           })}>
           <Tab.Screen name="Home" component={HomePage} />
           <Tab.Screen name="Clients" component={ClientsStackScreen} />
-          {/* <Tab.Screen name="User" component={UserScreen} /> */}
+          <Tab.Screen name="User" component={UserStackScreen} />
         </Tab.Navigator>
       ) : (
         <Stack.Navigator>
